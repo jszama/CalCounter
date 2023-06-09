@@ -1,0 +1,70 @@
+﻿<Window x:Class="CalCounter.RegisterPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalCounter"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="750"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="{x:Null}">
+
+
+    <materialDesign:Card 
+            UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ShadowAssist.ShadowDepth="Depth5"  Margin="25">
+
+        <Grid MouseDown="Border_MouseDown">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Border Background="#FF323232" Margin="0,0,0,5"/>
+            <StackPanel HorizontalAlignment="Center" Height="75" Width="150">
+                <Image Source="logo.png" Width="150" RenderTransformOrigin="0.5,0.989" Height="75"/>
+            </StackPanel>
+            <Button x:Name="exitBtn" ToolTip="Close Application" Click="exitApp" HorizontalAlignment="Right" Margin="0,10,10,33" Width="30" BorderBrush="#00673AB7">
+                <Button.Background>
+                    <ImageBrush ImageSource="/exit.png" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Border Background="#FF212121" Margin="0,70,0,0" Grid.RowSpan="2"/>
+            <Border Grid.Row="1" BorderBrush="#FF323232" CornerRadius="10" BorderThickness="8" Margin="200,10,200,21" Width="260">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="10" BlurRadius="15"/>
+                </Border.Effect>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Height="284" Width="250" Background="#FF323232">
+
+                    <TextBlock Text="Register" FontSize="24" FontWeight="Medium" HorizontalAlignment="Center" Foreground="#FF128F94" VerticalAlignment="Center" Margin="5,10,5,10" Padding="0,0,0,5"/>
+
+                    <Border BorderBrush="#FF212121" CornerRadius="10" BorderThickness="2,2,2,2" Margin="15,0,15,5" Height="40">
+                        <TextBox x:Name="usernameInput" materialDesign:HintAssist.Hint="Enter Username" Width="203" HorizontalAlignment="Left" CaretBrush="#FF128F94" SelectionBrush="#FF128F94" FontSize="14px" Background="{x:Null}" Foreground="#FFB1B1B1" BorderBrush="#FF212121" SelectionTextBrush="#FF212121" Padding="0,0,0,0" Margin="5,10,0,10"/>
+                    </Border>
+
+                    <Border BorderBrush="#FF212121" CornerRadius="10" BorderThickness="2,2,2,2" Margin="15,5,15,5" Height="40">
+                        <PasswordBox x:Name="passwordInput" materialDesign:HintAssist.Hint="Enter Password" Margin="5,10,0,10" Width="203" HorizontalAlignment="Left" CaretBrush="#FF128F94" SelectionBrush="#FF128F94" FontSize="14px" Foreground="#FFB1B1B1" BorderBrush="#FF212121" Background="{x:Null}" SelectionTextBrush="#FF212121" Padding="0,0,0,0" />
+                    </Border>
+
+                    <Border BorderBrush="#FF212121" CornerRadius="10" BorderThickness="2,2,2,2" Margin="15,5,15,0" Height="40">
+                        <PasswordBox x:Name="conPasswordInput" materialDesign:HintAssist.Hint="Confirm Password" Margin="5,10,0,10" Width="203" HorizontalAlignment="Left" CaretBrush="#FF128F94" SelectionBrush="#FF128F94" FontSize="14px" Foreground="#FFB1B1B1" BorderBrush="#FF212121" Background="{x:Null}" SelectionTextBrush="#FF212121" Padding="0,0,0,0" />
+                    </Border>
+
+                    <TextBlock x:Name="error" Visibility="Hidden" Foreground="Red" Padding="0,2,0,2" HorizontalAlignment="Center" />
+
+                    <Button x:Name="registerBtn" Click="register" Content="Create account" Margin="15,5,15,5" Background="#FF128F94" BorderBrush="#FF08676B" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ButtonAssist.CornerRadius="5" materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFB1B1B1" FontSize="16px" Height="30"/>
+
+                    <Button x:Name="loginRedirect" Click="gotoLogin" BorderThickness="0" Content="Back to login" Background="#00673AB7" BorderBrush="#00673AB7" Width="150" materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFB1B1B1" FontSize="14px" Padding="16,4,16,0"/>
+                </StackPanel>
+            </Border>
+
+
+        </Grid>
+
+    </materialDesign:Card>
+
+
+</Window>
