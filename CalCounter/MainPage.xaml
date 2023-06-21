@@ -16,20 +16,26 @@
     <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ShadowAssist.ShadowDepth="Depth5"  Margin="25">
         <Grid MouseDown="Border_MouseDown">
             <Grid.RowDefinitions>
-                <RowDefinition Height="75" />
+                <RowDefinition Height="100" />
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Border Background="#FF323232" Margin="0,0,0,5"/>
-            <StackPanel HorizontalAlignment="Center" Height="75" Width="150">
-                <Image Source="logo.png" Width="150" RenderTransformOrigin="0.5,0.989" Height="75"/>
+            <Border Background="#FF323232" Margin="0,0,0,0"/>
+            <StackPanel HorizontalAlignment="Center" Width="175">
+                <Image Source="logo.png" Width="175" RenderTransformOrigin="0.5,0.989" Height="100"/>
             </StackPanel>
-            <Button x:Name="exitBtn" ToolTip="Close Application" Click="exitApp" HorizontalAlignment="Right" Margin="0,10,10,33" Width="30" BorderBrush="#00673AB7">
+            <Button x:Name="exitBtn" ToolTip="Close Application" Click="exitApp" HorizontalAlignment="Right" Margin="0,10,10,58" Width="30" BorderBrush="#00673AB7">
                 <Button.Background>
                     <ImageBrush ImageSource="/exit.png" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Border Background="#FF212121" Margin="0,70,0,0" Grid.RowSpan="2"/>
+            <Border Background="#FF212121" Grid.Row="1"/>
+            <UniformGrid Columns="3" Rows="1" Grid.Row="1">
+                <Button x:Name="calendar" ToolTip="Open Calendar" Click="goCalendar" BorderBrush="#00673AB7" Background="#FF323232"  Height="256" Width="256" Foreground="#FF128F94" FontSize="55" Content="Calendar"/>
+                <Button x:Name="statistics" ToolTip="Open Statistics" Click="goStats" BorderBrush="#00673AB7" Background="#FF323232"  Height="256" Width="256" Foreground="#FF128F94" FontSize="55" Content="Statistics"/>
+                <Button x:Name="profile" ToolTip="Open Profile" Click="goProfile" BorderBrush="#00673AB7" Background="#FF323232" Height="256" Width="256" Content="Profile" FontSize="55" Foreground="#FF128F94"/>
+
+            </UniformGrid>
         </Grid>
     </materialDesign:Card>
 </Window>
