@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CalCounter
 {
@@ -90,7 +79,7 @@ namespace CalCounter
             if (validateRegister(usernameInput.Text, passwordInput.Password.ToString(), conPasswordInput.Password.ToString()))
             {
                 com1.Connection = con;
-                com1.CommandText = "insert into users (Username,Password) values ('" + usernameInput.Text + "','"+passwordInput.Password.ToString()+"')";
+                com1.CommandText = "insert into users (Username,Password) values ('" + usernameInput.Text + "','" + passwordInput.Password.ToString() + "')";
                 com1.ExecuteNonQuery();
                 con.Close();
             }
