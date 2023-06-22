@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Configuration;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -16,7 +11,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace CalCounter
 {
@@ -60,12 +55,11 @@ namespace CalCounter
             com.Connection = con;
             com.CommandText = "select * from users where username='" + username + "' and password='" + password + "'";
             dr = com.ExecuteReader();
-            if (dr.Read() && dr.HasRows) 
+            if (dr.Read() && dr.HasRows)
             {
                 error.Text = "Successfully logged in.";
                 error.Foreground = brush;
                 error.Visibility= Visibility.Visible;
-                currentUser = dr.GetValue(1).ToString();
                 return true;
             }
             else
@@ -78,7 +72,7 @@ namespace CalCounter
 
         private async void login(object sender, RoutedEventArgs e)
         {
-            if (con.State == System.Data.ConnectionState.Open) 
+            if (con.State == System.Data.ConnectionState.Open)
             {
                 con.Close();
             }
