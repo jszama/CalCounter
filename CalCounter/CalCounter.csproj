@@ -118,7 +118,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterPage.xaml.cs">
+    <Compile Include="RegisterPage.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SplashScreen.xaml.cs">

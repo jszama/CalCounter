@@ -18,10 +18,6 @@ namespace CalCounter
             Application.Current.Shutdown();
         }
 
-        private void goProfile(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void goCalendar(object sender, RoutedEventArgs e)
         {
 

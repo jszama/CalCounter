@@ -11,9 +11,9 @@ namespace CalCounter
     /// </summary>
     public partial class RegisterPage
     {
-        SqlConnection con = new SqlConnection();
-        SqlCommand com = new SqlCommand();
-        SqlCommand com1 = new SqlCommand();
+        readonly SqlConnection con = new SqlConnection();
+        readonly SqlCommand com = new SqlCommand();
+        readonly SqlCommand com1 = new SqlCommand();
         SqlDataReader dr;
 
         public RegisterPage()

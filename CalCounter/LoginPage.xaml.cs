@@ -4,14 +4,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Threading;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Threading;
 
 namespace CalCounter
 {
@@ -50,7 +42,7 @@ namespace CalCounter
         {
             var converter = new BrushConverter();
             var brush = (Brush)converter.ConvertFromString("#FF00FF00");
-            
+
             con.Open();
             com.Connection = con;
             com.CommandText = "select * from users where username='" + username + "' and password='" + password + "'";
@@ -59,7 +51,8 @@ namespace CalCounter
             {
                 error.Text = "Successfully logged in.";
                 error.Foreground = brush;
-                error.Visibility= Visibility.Visible;
+                error.Visibility = Visibility.Visible;
+                currentUser = dr.GetValue(dr.GetOrdinal("Username")).ToString();
                 return true;
             }
             else
