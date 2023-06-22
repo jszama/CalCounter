@@ -16,7 +16,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Threading;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CalCounter
 {
@@ -25,9 +25,10 @@ namespace CalCounter
     /// </summary>
     public partial class LoginPage : Window
     {
-        SqlConnection con = new SqlConnection();
-        SqlCommand com = new SqlCommand();
+        readonly SqlConnection con = new SqlConnection();
+        readonly SqlCommand com = new SqlCommand();
         SqlDataReader dr;
+        public static string currentUser;
 
         private async Task PutTaskDelay()
         {
@@ -50,10 +51,11 @@ namespace CalCounter
             DragMove();
         }
 
-        private bool validateUser(string username, string password)
+        public bool validateUser(string username, string password)
         {
-            var converter = new System.Windows.Media.BrushConverter();
+            var converter = new BrushConverter();
             var brush = (Brush)converter.ConvertFromString("#FF00FF00");
+            
             con.Open();
             com.Connection = con;
             com.CommandText = "select * from users where username='" + username + "' and password='" + password + "'";
@@ -63,6 +65,7 @@ namespace CalCounter
                 error.Text = "Successfully logged in.";
                 error.Foreground = brush;
                 error.Visibility= Visibility.Visible;
+                currentUser = dr.GetValue(1).ToString();
                 return true;
             }
             else

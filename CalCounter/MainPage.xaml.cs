@@ -34,5 +34,12 @@ namespace CalCounter
         {
             DragMove();
         }
+
+        private void goProfile(object sender, RoutedEventArgs e)
+        {
+            ProfilePage profilePage = new ProfilePage();
+            Close();
+            profilePage.Show();
+        }
     }
 }
