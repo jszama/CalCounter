@@ -20,7 +20,9 @@ namespace CalCounter
 
         private void goCalendar(object sender, RoutedEventArgs e)
         {
-
+            CalendarPage calendarPage = new CalendarPage();
+            Close();
+            calendarPage.Show();
         }
         private void goStats(object sender, RoutedEventArgs e)
         {

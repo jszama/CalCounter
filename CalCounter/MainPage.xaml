@@ -31,7 +31,7 @@
             </Button>
             <Border Background="#FF212121" Grid.Row="1"/>
             <UniformGrid Columns="3" Rows="1" Grid.Row="1">
-                <Button Style="{DynamicResource RoundButton}" x:Name="calendar" ToolTip="Open Calendar"  BorderBrush="#00673AB7" Background="#FF323232"  Height="256" Width="256" Foreground="#FF128F94" FontSize="55" Content="Calendar"/>
+                <Button Style="{DynamicResource RoundButton}" x:Name="calendar" Click="goCalendar" ToolTip="Open Calendar"  BorderBrush="#00673AB7" Background="#FF323232"  Height="256" Width="256" Foreground="#FF128F94" FontSize="55" Content="Calendar"/>
                 <Button Style="{DynamicResource RoundButton}" x:Name="statistics" ToolTip="Open Statistics"  BorderBrush="#00673AB7" Background="#FF323232"  Height="256" Width="256" Foreground="#FF128F94" FontSize="55" Content="Statistics"/>
                 <Button Style="{DynamicResource RoundButton}" x:Name="profile" Click="goProfile" ToolTip="Open Profile" BorderBrush="#00673AB7" Background="#FF323232" Height="256" Width="256" Content="Profile" FontSize="55" Foreground="#FF128F94"/>
             </UniformGrid>
