@@ -30,11 +30,19 @@
                 </Button.Background>
             </Button>
             <Border Background="#FF212121" Grid.Row="1"/>
-            <UniformGrid Columns="1" Rows="4" Grid.Row="1">
+            <UniformGrid Columns="1" Rows="5" Grid.Row="1">
                 <TextBlock x:Name="usernameDisplay" Foreground="#FF128F94" Padding="0,2,0,2" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <Image Height="200" x:Name="profilePicture"/>
-                <Button Style="{DynamicResource RoundButton}" Click="addPicture" x:Name="pictureUploader" ToolTip="Upload image"  BorderBrush="#00673AB7" Background="#FF323232"  Height="64" Width="256" Foreground="#FF128F94" FontSize="24" Content="Upload profile picture"/>
-                <Button  Click="goMain" x:Name="mainButton" ToolTip="Back to menu"  BorderBrush="#00673AB7" Background="#FF323232"  Height="128" Width="256" Foreground="#FF128F94" FontSize="32" Content="Back to menu"/>
+                <StackPanel Margin="0,25,0,-51" Background="#FF323232" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="bioTitle" Text="Bio" Foreground="#FF128F94" FontSize="44" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock x:Name="bioDisplay" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" />
+                    <TextBox x:Name="bioInput" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" Visibility="Collapsed"/>
+                </StackPanel>
+                <UniformGrid Columns="2" Rows="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Style="{DynamicResource RoundButton}" Click="addPicture" x:Name="pictureUploader" ToolTip="Upload image"  BorderBrush="#00673AB7" Background="#FF323232"  Height="64" Width="256" Foreground="#FF128F94" FontSize="24" Content="Upload profile picture" Margin="0,75,0,0"/>
+                    <Button Style="{DynamicResource RoundButton}" Click="updateBio" x:Name="bioUpdater" ToolTip="Update bio"  BorderBrush="#00673AB7" Background="#FF323232"  Height="64" Width="256" Foreground="#FF128F94" FontSize="24" Content="Update bio" Margin="0,75,0,0"/>
+                </UniformGrid>
+                <Button  Click="goMain" x:Name="mainButton" ToolTip="Back to menu"  BorderBrush="#00673AB7" Background="#FF323232"  Height="128" Width="256" Foreground="#FF128F94" FontSize="32" Content="Back to menu" Margin="0,15,0,0"/>
             </UniformGrid>
         </Grid>
     </materialDesign:Card>

@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -18,7 +19,9 @@ namespace CalCounter
         readonly SqlConnection con = new SqlConnection();
         readonly SqlCommand com = new SqlCommand();
         SqlDataReader dr;
-        public string userPicture;
+        string userPicture;
+        string userBio;
+        bool edited = false;
         public ProfilePage()
         {
             InitializeComponent();
@@ -27,7 +30,7 @@ namespace CalCounter
 
             com.Connection = con;
             showPicture();
-            usernameDisplay.Text = LoginPage.currentUser;
+            usernameDisplay.Text = $"Welcome {LoginPage.currentUser}";
         }
         private void showPicture()
         {
@@ -38,6 +41,7 @@ namespace CalCounter
             if (dr.Read() && !dr.IsDBNull(dr.GetOrdinal("Image")))
             {
                 userPicture = dr.GetValue(dr.GetOrdinal("Image")).ToString();
+                userBio = dr.GetValue(dr.GetOrdinal("Bio")).ToString();
 
                 myBitmapImage.BeginInit();
                 myBitmapImage.UriSource = new Uri(userPicture);
@@ -46,6 +50,7 @@ namespace CalCounter
                 myBitmapImage.EndInit();
 
                 profilePicture.Source = myBitmapImage;
+                bioDisplay.Text = userBio;
             }
             else
             {
@@ -74,6 +79,25 @@ namespace CalCounter
                 com.ExecuteNonQuery();
                 showPicture();
             }
+        }
+
+        public void updateBio(object sender, RoutedEventArgs e)
+        {
+            if (!edited)
+            {
+                bioDisplay.Visibility = Visibility.Collapsed;
+                bioInput.Visibility = Visibility.Visible;
+                edited = true;
+            } else
+            {
+                bioDisplay.Text = bioInput.Text;
+                com.CommandText = $"update users set Bio = '{bioInput.Text}' where username='{LoginPage.currentUser}'";
+                com.ExecuteNonQuery();
+                bioDisplay.Visibility = Visibility.Visible;
+                bioInput.Visibility = Visibility.Collapsed;
+                edited = false;
+            }
+
         }
 
         private void exitApp(object sender, RoutedEventArgs e)
