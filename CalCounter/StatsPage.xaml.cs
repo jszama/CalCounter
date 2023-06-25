@@ -30,7 +30,7 @@ namespace CalCounter
             com.CommandText = $"SELECT AVG(calories) AS average_calories FROM (SELECT TOP 30 calories FROM Calendar WHERE Username = '{LoginPage.currentUser}' ORDER BY CONVERT(datetime, date, 103) DESC) AS latest_records;";
             dr = com.ExecuteReader();
        
-            if (dr.Read())
+            if (dr.Read() && !dr.IsDBNull(dr.GetOrdinal("average_calories")))
             {
                 double monthlyAvg = Convert.ToDouble(dr.GetValue(0));
                 monthly.Text = $"Monthly Average:{monthlyAvg}";
@@ -44,7 +44,7 @@ namespace CalCounter
             com2.CommandText = $"SELECT AVG(calories) AS average_calories FROM (SELECT TOP 7 calories FROM Calendar WHERE Username = '{LoginPage.currentUser}' ORDER BY CONVERT(datetime, date, 103) DESC) AS latest_records;";
             dr = com2.ExecuteReader();
 
-            if (dr.Read())
+            if (dr.Read() && !dr.IsDBNull(0))
             {
                 double weeklyAvg = Convert.ToDouble(dr.GetValue(0));
                 weekly.Text = $"Weekly Average:{weeklyAvg}";
