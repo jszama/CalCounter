@@ -33,10 +33,6 @@ namespace CalCounter
         {
             com.CommandText = "select * from users where username='" + LoginPage.currentUser + "'";
             dr = com.ExecuteReader();
-
-            // Create Image Element
-
-            // Create source
             BitmapImage myBitmapImage = new BitmapImage();
 
             if (dr.Read() && !dr.IsDBNull(dr.GetOrdinal("Image")))

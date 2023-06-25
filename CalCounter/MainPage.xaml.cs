@@ -26,8 +26,10 @@ namespace CalCounter
         }
         private void goStats(object sender, RoutedEventArgs e)
         {
+            StatsPage statsPage = new StatsPage();
+            Close();
+            statsPage.Show();
         }
-
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {

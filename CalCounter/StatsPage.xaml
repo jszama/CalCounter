@@ -1,9 +1,10 @@
-﻿<Window x:Class="CalCounter.MainPage"
+﻿<Window
+        x:Class="CalCounter.StatsPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:local="clr-namespace:CalCounter"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CalCounter"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1200"
@@ -11,6 +12,7 @@
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
         Background="{x:Null}">
+
 
 
     <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ShadowAssist.ShadowDepth="Depth5"  Margin="25">
@@ -30,11 +32,21 @@
                 </Button.Background>
             </Button>
             <Border Background="#FF212121" Grid.Row="1"/>
-            <UniformGrid Columns="3" Rows="1" Grid.Row="1">
-                <Button Style="{DynamicResource RoundButton}" x:Name="calendar" Click="goCalendar" ToolTip="Open Calendar"  BorderBrush="#00673AB7" Background="#FF323232"  Height="256" Width="256" Foreground="#FF128F94" FontSize="55" Content="Calendar"/>
-                <Button Style="{DynamicResource RoundButton}" x:Name="statistics" Click="goStats" ToolTip="Open Statistics"  BorderBrush="#00673AB7" Background="#FF323232"  Height="256" Width="256" Foreground="#FF128F94" FontSize="55" Content="Statistics"/>
-                <Button Style="{DynamicResource RoundButton}" x:Name="profile" Click="goProfile" ToolTip="Open Profile" BorderBrush="#00673AB7" Background="#FF323232" Height="256" Width="256" Content="Profile" FontSize="55" Foreground="#FF128F94"/>
-            </UniformGrid>
+
+            <Border Grid.Row="1" BorderBrush="#FF323232" CornerRadius="10" BorderThickness="8" Margin="319,152,319,152" Width="512">
+                <StackPanel Background="#FF373737">
+                    <TextBlock Text="Statistics" FontSize="32" FontWeight="Bold" Foreground="#FF128F94" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,25,0,10"/>
+                    <Border Background="#FF212121" Grid.Row="1" BorderThickness="25,25,25,0" Height="234">
+                        <StackPanel>
+                            <TextBlock x:Name="monthly" Text="Monthly Average:" FontSize="28" FontWeight="Medium" Foreground="#FF128F94" Width="332" Margin="0,50,0,0"/>
+                            <TextBlock x:Name="weekly" Text="Weekly Average:" FontSize="28" FontWeight="Medium" Foreground="#FF128F94" Width="332" Margin="0,50,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Button Style="{DynamicResource RoundButtonSmall}" Click="goMain" x:Name="mainButton" ToolTip="Back to menu"  BorderBrush="#00673AB7" Background="#FF323232"  Height="48" Width="256" Foreground="#FF128F94" FontSize="28" Content="Back to menu" Margin="0,45,0,0"/>
+
+                </StackPanel>
+            </Border>
         </Grid>
     </materialDesign:Card>
 </Window>

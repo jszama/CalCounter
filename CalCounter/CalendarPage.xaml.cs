@@ -2,11 +2,9 @@
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace CalCounter
 {
@@ -60,7 +58,7 @@ namespace CalCounter
             if (dr.Read())
             {
                 calories = (int)dr.GetValue(dr.GetOrdinal("Calories"));
-            } 
+            }
             else
             {
                 calories = 0;
@@ -89,14 +87,14 @@ namespace CalCounter
                 com2.ExecuteNonQuery();
             }
             dr.Close();
-            caloriesDisplay.Text = $"Current Calories: {calories+currentCal}";
+            caloriesDisplay.Text = $"Current Calories: {calories + currentCal}";
         }
 
         private void RemoveCalories(object sender, RoutedEventArgs e)
         {
             DateTime selectedDate = currentDate(calendar);
             int calories = int.Parse(calorieInput.Text);
-            int currentCal = 0;
+            int currentCal;
             com.CommandText = "select * from calendar where username='" + LoginPage.currentUser + "' and date='" + selectedDate.Date.ToString() + "'";
             dr = com.ExecuteReader();
 
@@ -116,7 +114,7 @@ namespace CalCounter
             }
             else
             {
-                error.Text ="Unable to remove non-existent calories";
+                error.Text = "Unable to remove non-existent calories";
 
             }
             dr.Close();
@@ -125,12 +123,8 @@ namespace CalCounter
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listBox = (ListBox)sender;
-            var selectedItem = listBox.Items[0];
 
-            if (selectedItem != null)
-            {
-                listBox.ScrollIntoView(selectedItem);
-            }
+            listBox.ScrollIntoView(listBox.Items[0]);
 
             if (selectionMenu.SelectedIndex == 0)
             {
