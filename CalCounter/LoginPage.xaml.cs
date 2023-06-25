@@ -16,10 +16,11 @@ namespace CalCounter
         readonly SqlCommand com = new SqlCommand();
         SqlDataReader dr;
         public static string currentUser;
+        bool hidden = true;
 
         private async Task PutTaskDelay()
         {
-            await Task.Delay(1500);
+            await Task.Delay(1000);
         }
 
         public LoginPage()
@@ -65,14 +66,43 @@ namespace CalCounter
 
         private async void login(object sender, RoutedEventArgs e)
         {
+            string pass;
             if (con.State == System.Data.ConnectionState.Open)
             {
                 con.Close();
             }
-            if (validateUser(usernameInput.Text, passwordInput.Password.ToString()))
+
+            if (hidden)
+            {
+                pass = passwordInput.Password.ToString();
+            }
+            else
+            {
+                pass = passwordInputShow.Text;
+            }
+
+            if (validateUser(usernameInput.Text, pass))
             {
                 await PutTaskDelay();
                 gotoMain();
+            }
+        }
+
+        private void showPassword(object sender, RoutedEventArgs e)
+        {
+            if (hidden)
+            {
+                passwordInput.Visibility = Visibility.Collapsed;
+                passwordInputShow.Text = passwordInput.Password;
+                passwordInputShow.Visibility = Visibility.Visible;
+                hidden = false;
+            }
+            else
+            {
+                passwordInputShow.Visibility = Visibility.Collapsed;
+                passwordInput.Password = passwordInputShow.Text;
+                passwordInput.Visibility = Visibility.Visible;
+                hidden = true;
             }
         }
 

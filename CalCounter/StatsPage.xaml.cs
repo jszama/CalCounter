@@ -17,7 +17,7 @@ namespace CalCounter
         readonly SqlConnection con = new SqlConnection();
         readonly SqlCommand com = new SqlCommand();
         readonly SqlCommand com2 = new SqlCommand();
-        SqlDataReader dr;
+        readonly SqlDataReader dr;
         public StatsPage()
         {
             InitializeComponent();

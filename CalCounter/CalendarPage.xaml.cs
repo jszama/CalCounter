@@ -72,18 +72,18 @@ namespace CalCounter
             DateTime selectedDate = currentDate(calendar);
             int calories = int.Parse(calorieInput.Text);
             int currentCal = 0;
-            com.CommandText = "select * from calendar where username='" + LoginPage.currentUser + "' and date='" + selectedDate.Date.ToString() + "'";
+            com.CommandText = "select * from calendar where username='" + LoginPage.currentUser + "' and date='" + selectedDate.Date + "'";
             dr = com.ExecuteReader();
 
             if (dr.Read())
             {
                 currentCal = (int)dr.GetValue(dr.GetOrdinal("Calories"));
-                com2.CommandText = $"update calendar set calories={currentCal + calories} where username='{LoginPage.currentUser}' and date='{selectedDate.Date.ToString()}'";
+                com2.CommandText = $"update calendar set calories={currentCal + calories} where username='{LoginPage.currentUser}' and date='{selectedDate.Date}'";
                 com2.ExecuteNonQuery();
             }
             else
             {
-                com2.CommandText = $"insert into calendar (username,date,calories) values ('{LoginPage.currentUser}', '{selectedDate.Date.ToString()}',{calories})";
+                com2.CommandText = $"insert into calendar (username,date,calories) values ('{LoginPage.currentUser}', '{selectedDate.Date}',{calories})";
                 com2.ExecuteNonQuery();
             }
             dr.Close();
@@ -95,7 +95,7 @@ namespace CalCounter
             DateTime selectedDate = currentDate(calendar);
             int calories = int.Parse(calorieInput.Text);
             int currentCal;
-            com.CommandText = "select * from calendar where username='" + LoginPage.currentUser + "' and date='" + selectedDate.Date.ToString() + "'";
+            com.CommandText = $"select * from calendar where username='{LoginPage.currentUser}' and date='{selectedDate.Date}'";
             dr = com.ExecuteReader();
 
             if (dr.Read())
@@ -107,7 +107,7 @@ namespace CalCounter
                 }
                 else
                 {
-                    com2.CommandText = $"update calendar set calories={currentCal - calories} where username='{LoginPage.currentUser}' and date='{selectedDate.Date.ToString()}'";
+                    com2.CommandText = $"update calendar set calories={currentCal - calories} where username='{LoginPage.currentUser}' and date='{selectedDate.Date}'";
                     com2.ExecuteNonQuery();
                     caloriesDisplay.Text = $"Current Calories: {currentCal - calories}";
                 }

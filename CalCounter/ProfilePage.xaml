@@ -36,7 +36,7 @@
                 <StackPanel Margin="0,25,0,-51" Background="#FF323232" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock x:Name="bioTitle" Text="Bio" Foreground="#FF128F94" FontSize="44" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <TextBlock x:Name="bioDisplay" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" />
-                    <TextBox x:Name="bioInput" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" Visibility="Collapsed"/>
+                    <TextBox x:Name="bioInput" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" Visibility="Collapsed" SelectionTextBrush="#FF128F94"/>
                 </StackPanel>
                 <UniformGrid Columns="2" Rows="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Style="{DynamicResource RoundButton}" Click="addPicture" x:Name="pictureUploader" ToolTip="Upload image"  BorderBrush="#00673AB7" Background="#FF323232"  Height="64" Width="256" Foreground="#FF128F94" FontSize="24" Content="Upload profile picture" Margin="0,75,0,0"/>

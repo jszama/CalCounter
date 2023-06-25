@@ -28,7 +28,7 @@ namespace CalCounter
             for (int i = 0; i <= 100; i++)
             {
                 (sender as BackgroundWorker).ReportProgress(i);
-                Thread.Sleep(50);
+                Thread.Sleep(25);
             }
         }
 

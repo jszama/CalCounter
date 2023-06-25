@@ -3,7 +3,6 @@ using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -31,6 +30,10 @@ namespace CalCounter
             com.Connection = con;
             showPicture();
             usernameDisplay.Text = $"Welcome {LoginPage.currentUser}";
+        }
+        private void showBio()
+        {
+            bioDisplay.Text = bioInput.Text;
         }
         private void showPicture()
         {
@@ -85,14 +88,17 @@ namespace CalCounter
         {
             if (!edited)
             {
+                bioInput.Text = bioDisplay.Text;
                 bioDisplay.Visibility = Visibility.Collapsed;
                 bioInput.Visibility = Visibility.Visible;
                 edited = true;
-            } else
+            }
+            else
             {
-                bioDisplay.Text = bioInput.Text;
-                com.CommandText = $"update users set Bio = '{bioInput.Text}' where username='{LoginPage.currentUser}'";
+          
+                com.CommandText = $"update users set bio = '{bioInput.Text}' where username='{LoginPage.currentUser}'";
                 com.ExecuteNonQuery();
+                showBio();
                 bioDisplay.Visibility = Visibility.Visible;
                 bioInput.Visibility = Visibility.Collapsed;
                 edited = false;

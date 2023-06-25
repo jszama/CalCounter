@@ -46,11 +46,19 @@
                     </Border>
 
                     <Border BorderBrush="#FF212121" CornerRadius="10" BorderThickness="2,2,2,2" Margin="15,10,15,5" Height="45">
-                        <PasswordBox x:Name="passwordInput" materialDesign:HintAssist.Hint="Enter Password" Margin="5,10,0,10" Width="203" HorizontalAlignment="Left" CaretBrush="#FF128F94" SelectionBrush="#FF128F94" FontSize="18px" Foreground="#FFB1B1B1" BorderBrush="#FF212121" Background="{x:Null}" SelectionTextBrush="#FF212121" Padding="0,0,0,0" />
+                        <Canvas>
+                            <PasswordBox x:Name="passwordInput" materialDesign:HintAssist.Hint="Enter Password" Margin="5,10,0,10" Width="203" HorizontalAlignment="Left" CaretBrush="#FF128F94" SelectionBrush="#FF128F94" FontSize="18px" Foreground="#FFB1B1B1" BorderBrush="#FF212121" Background="{x:Null}" SelectionTextBrush="#FF212121" Padding="0,0,0,0" />
+                            <TextBox x:Name="passwordInputShow" materialDesign:HintAssist.Hint="Enter Password" Margin="5,10,0,10" Width="203" HorizontalAlignment="Left" CaretBrush="#FF128F94" SelectionBrush="#FF128F94" FontSize="18px" Foreground="#FFB1B1B1" BorderBrush="#FF212121" Background="{x:Null}" SelectionTextBrush="#FF212121" Padding="0,0,0,0" Visibility="Collapsed"/>
+                            <Button Click="showPassword" Width="24" HorizontalAlignment="Center" Canvas.Left="184" Canvas.Top="12" VerticalAlignment="Top" Height="16">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="show.png" Stretch="UniformToFill"/>
+                                </Button.Background>
+                            </Button>
+                        </Canvas>
                     </Border>
 
                     <TextBlock x:Name="error" Visibility="Hidden" Foreground="Red" Padding="0,2,0,2" HorizontalAlignment="Center" />
-                    
+
                     <Button x:Name="loginBtn" Click="login" Content="Log in" Margin="15,15,15,10" Background="#FF128F94" BorderBrush="#FF08676B" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ButtonAssist.CornerRadius="5" materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFB1B1B1" FontSize="18" Height="30"/>
 
                     <Button x:Name="signupBtn" Click="gotoSignup" BorderThickness="0" Content="Sign up" Background="#00673AB7" BorderBrush="#00673AB7" Width="100" materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFB1B1B1" Margin="0,5,0,0" FontSize="16"/>
