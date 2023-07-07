@@ -11,10 +11,10 @@ namespace CalCounter
     /// </summary>
     public partial class RegisterPage
     {
-        readonly SqlConnection con = new SqlConnection();
-        readonly SqlCommand com = new SqlCommand();
-        readonly SqlCommand com1 = new SqlCommand();
-        SqlDataReader dr;
+        private readonly SqlConnection con = new SqlConnection();
+        private readonly SqlCommand com = new SqlCommand();
+        private readonly SqlCommand com1 = new SqlCommand();
+        private SqlDataReader dr;
 
         public RegisterPage()
         {
@@ -85,11 +85,11 @@ namespace CalCounter
             }
         }
 
-        public void gotoLogin(object sender, RoutedEventArgs e)
+        private void gotoLogin(object sender, RoutedEventArgs e)
         {
             LoginPage loginPage = new LoginPage();
-            Close();
             loginPage.Show();
+            Close();
         }
     }
 }

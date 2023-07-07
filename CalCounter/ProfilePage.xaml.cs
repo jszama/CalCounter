@@ -15,12 +15,12 @@ namespace CalCounter
     /// </summary>
     public partial class ProfilePage
     {
-        readonly SqlConnection con = new SqlConnection();
-        readonly SqlCommand com = new SqlCommand();
-        SqlDataReader dr;
-        string userPicture;
-        string userBio;
-        bool edited = false;
+        private readonly SqlConnection con = new SqlConnection();
+        private readonly SqlCommand com = new SqlCommand();
+        private SqlDataReader dr;
+        private string userPicture;
+        private string userBio;
+        private bool edited = false;
         public ProfilePage()
         {
             InitializeComponent();
@@ -66,7 +66,7 @@ namespace CalCounter
             }
             dr.Close();
         }
-        public void addPicture(object sender, RoutedEventArgs e)
+        private void addPicture(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog
             {
@@ -84,7 +84,7 @@ namespace CalCounter
             }
         }
 
-        public void updateBio(object sender, RoutedEventArgs e)
+        private void updateBio(object sender, RoutedEventArgs e)
         {
             if (!edited)
             {
@@ -95,7 +95,7 @@ namespace CalCounter
             }
             else
             {
-          
+
                 com.CommandText = $"update users set bio = '{bioInput.Text}' where username='{LoginPage.currentUser}'";
                 com.ExecuteNonQuery();
                 showBio();

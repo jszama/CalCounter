@@ -13,10 +13,10 @@ namespace CalCounter
     /// </summary>
     public partial class CalendarPage
     {
-        readonly SqlConnection con = new SqlConnection();
-        readonly SqlCommand com = new SqlCommand();
-        readonly SqlCommand com2 = new SqlCommand();
-        SqlDataReader dr;
+        private readonly SqlConnection con = new SqlConnection();
+        private readonly SqlCommand com = new SqlCommand();
+        private readonly SqlCommand com2 = new SqlCommand();
+        private SqlDataReader dr;
         public CalendarPage()
         {
             InitializeComponent();

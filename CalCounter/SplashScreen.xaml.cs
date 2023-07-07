@@ -39,8 +39,8 @@ namespace CalCounter
             if (progressBar.Value == 100)
             {
                 LoginPage loginPage = new LoginPage();
-                Close();
                 loginPage.Show();
+                Close();
             }
         }
 

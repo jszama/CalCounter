@@ -21,14 +21,14 @@ namespace CalCounter
         private void goCalendar(object sender, RoutedEventArgs e)
         {
             CalendarPage calendarPage = new CalendarPage();
-            Close();
             calendarPage.Show();
+            Close();
         }
         private void goStats(object sender, RoutedEventArgs e)
         {
             StatsPage statsPage = new StatsPage();
-            Close();
             statsPage.Show();
+            Close();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -39,8 +39,8 @@ namespace CalCounter
         private void goProfile(object sender, RoutedEventArgs e)
         {
             ProfilePage profilePage = new ProfilePage();
-            Close();
             profilePage.Show();
+            Close();
         }
     }
 }

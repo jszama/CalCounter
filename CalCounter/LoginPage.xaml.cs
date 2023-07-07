@@ -12,11 +12,11 @@ namespace CalCounter
     /// </summary>
     public partial class LoginPage : Window
     {
-        readonly SqlConnection con = new SqlConnection();
-        readonly SqlCommand com = new SqlCommand();
-        SqlDataReader dr;
-        public static string currentUser;
-        bool hidden = true;
+        private readonly SqlConnection con = new SqlConnection();
+        private readonly SqlCommand com = new SqlCommand();
+        private SqlDataReader dr;
+        protected internal static string currentUser;
+        private bool hidden = true;
 
         private async Task PutTaskDelay()
         {
@@ -39,7 +39,7 @@ namespace CalCounter
             DragMove();
         }
 
-        public bool validateUser(string username, string password)
+        private bool validateUser(string username, string password)
         {
             var converter = new BrushConverter();
             var brush = (Brush)converter.ConvertFromString("#FF00FF00");
@@ -109,15 +109,15 @@ namespace CalCounter
         private void gotoMain()
         {
             MainPage mainPage = new MainPage();
-            Close();
             mainPage.Show();
+            Close();
         }
 
         private void gotoSignup(object sender, RoutedEventArgs e)
         {
             RegisterPage registerPage = new RegisterPage();
-            Close();
             registerPage.Show();
+            Close();
         }
     }
 }

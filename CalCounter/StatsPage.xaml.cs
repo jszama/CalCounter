@@ -3,9 +3,7 @@ using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using static ServiceStack.Script.Lisp;
 
 namespace CalCounter
 {
@@ -14,10 +12,10 @@ namespace CalCounter
     /// </summary>
     public partial class StatsPage
     {
-        readonly SqlConnection con = new SqlConnection();
-        readonly SqlCommand com = new SqlCommand();
-        readonly SqlCommand com2 = new SqlCommand();
-        readonly SqlDataReader dr;
+        private readonly SqlConnection con = new SqlConnection();
+        private readonly SqlCommand com = new SqlCommand();
+        private readonly SqlCommand com2 = new SqlCommand();
+        private readonly SqlDataReader dr;
         public StatsPage()
         {
             InitializeComponent();
@@ -29,7 +27,7 @@ namespace CalCounter
 
             com.CommandText = $"SELECT AVG(calories) AS average_calories FROM (SELECT TOP 30 calories FROM Calendar WHERE Username = '{LoginPage.currentUser}' ORDER BY CONVERT(datetime, date, 103) DESC) AS latest_records;";
             dr = com.ExecuteReader();
-       
+
             if (dr.Read() && !dr.IsDBNull(dr.GetOrdinal("average_calories")))
             {
                 double monthlyAvg = Convert.ToDouble(dr.GetValue(0));
