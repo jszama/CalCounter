@@ -29,8 +29,13 @@
                     </Style>
                 </Style.Resources>
             </Style>
+            <Style TargetType="ListBox">
+                <Setter Property="Foreground" Value="#FF128F94"/>
+            </Style>
             <Style TargetType="ListBoxItem">
                 <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="#FF128F94" />
+                <Setter Property="Width" Value="140"/>
                 <Setter Property="Padding" Value="5"/>
                 <Setter Property="Template">
                     <Setter.Value>
