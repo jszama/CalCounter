@@ -2,6 +2,7 @@
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -19,7 +20,9 @@ namespace CalCounter
     {
         private readonly SqlConnection con = new SqlConnection();
         private readonly SqlCommand com = new SqlCommand();
+        private readonly SqlCommand com2 = new SqlCommand();
         private SqlDataReader dr;
+        private SqlDataReader dr2;
         private string userPicture;
         private string userBio;
         private bool edited = false;
@@ -31,6 +34,7 @@ namespace CalCounter
             con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString.ToString();
             con.Open();
 
+            com2.Connection = con;
             com.Connection = con;
             showPicture();
             showFriends();
@@ -108,15 +112,20 @@ namespace CalCounter
             }
             else
             {
-
-                com.CommandText = $"update users set bio = '{bioInput.Text}' where username='{LoginPage.currentUser}'";
-                com.ExecuteNonQuery();
-                showBio();
-                bioDisplay.Visibility = Visibility.Visible;
-                bioInput.Visibility = Visibility.Collapsed;
-                edited = false;
+                if (bioInput.Text.Length < 45)
+                {
+                    com.CommandText = $"update users set bio = '{bioInput.Text}' where username='{LoginPage.currentUser}'";
+                    com.ExecuteNonQuery();
+                    showBio();
+                    bioDisplay.Visibility = Visibility.Visible;
+                    bioInput.Visibility = Visibility.Collapsed;
+                    edited = false;
+                }   
+                else
+                {
+                    bioInput.Text = "Bio must be less than 45 characters.";
+                } 
             }
-
         }
 
         private void showFriends()
@@ -173,9 +182,11 @@ namespace CalCounter
             {
                 friendsList.Visibility = Visibility.Collapsed;
                 friendActions.Visibility = Visibility.Collapsed;
+                friendTitle.Visibility = Visibility.Collapsed;
 
                 showRequests();
 
+                requestTitle.Visibility = Visibility.Visible;
                 requestList.Visibility = Visibility.Visible;
                 requestActions.Visibility = Visibility.Visible;
                 requestShow = true;
@@ -184,10 +195,105 @@ namespace CalCounter
             {
                 friendsList.Visibility = Visibility.Visible;
                 friendActions.Visibility = Visibility.Visible;
+                friendTitle.Visibility = Visibility.Visible;
+
+                requestTitle.Visibility = Visibility.Collapsed;
                 requestList.Visibility = Visibility.Collapsed;
                 requestActions.Visibility = Visibility.Collapsed;
                 requestShow = false;
             }
+        }
+
+        private void viewFriend(object sender, RoutedEventArgs e)
+        {
+            if ((friendsList.SelectedItem as ListBoxItem) != null)
+            {
+                if ((friendsList.SelectedItem as ListBoxItem).Content != null)
+                {
+                    BitmapImage myBitmapImage = new BitmapImage();
+                    string selectedFriend = (friendsList.SelectedItem as ListBoxItem).Content.ToString();
+                    com.CommandText = $"select * from Users where username='{selectedFriend}'";
+                    dr = com.ExecuteReader();
+                    Int32 publicType = 0;
+                    if (dr.Read() && Convert.ToInt32(dr.GetValue(dr.GetOrdinal("Privacy"))) == publicType)
+                    {
+                        friendUsernameDisplay.Text = dr.GetString(dr.GetOrdinal("Username"));
+
+                        myBitmapImage.BeginInit();
+                        myBitmapImage.UriSource = new Uri(dr.GetValue(dr.GetOrdinal("Image")).ToString());
+
+                        myBitmapImage.DecodePixelHeight = 200;
+                        myBitmapImage.EndInit();
+
+                        com2.CommandText = $"SELECT AVG(calories) AS average_calories FROM (SELECT TOP 30 calories FROM Calendar WHERE Username = '{selectedFriend}' ORDER BY CONVERT(datetime, date, 103) DESC) AS latest_records;";
+                        dr2 = com2.ExecuteReader();
+
+                        if (dr2.Read() && !dr2.IsDBNull(dr2.GetOrdinal("average_calories")))
+                        {
+                            double monthlyAvg = Convert.ToDouble(dr2.GetValue(0));
+                            monthly.Text = $"Monthly Average:{monthlyAvg}";
+                        }
+                        else
+                        {
+                            monthly.Text = "Monthly Average: N/A";
+                        }
+
+                        dr2.Close();
+                        com2.CommandText = $"SELECT AVG(calories) AS average_calories FROM (SELECT TOP 7 calories FROM Calendar WHERE Username = '{selectedFriend}' ORDER BY CONVERT(datetime, date, 103) DESC) AS latest_records;";
+                        dr2 = com2.ExecuteReader();
+
+                        if (dr2.Read() && !dr2.IsDBNull(0))
+                        {
+                            double weeklyAvg = Convert.ToDouble(dr2.GetValue(0));
+                            weekly.Text = $"Weekly Average:{weeklyAvg}";
+                        }
+                        else
+                        {
+                            weekly.Text = "Weekly Average: N/A";
+                        }
+                        dr2.Close();
+
+
+                        friendProfilePicture.Source = myBitmapImage;
+                        friendBioDisplay.Text = dr.GetString(dr.GetOrdinal("Bio"));
+
+                        userInfo.Visibility = Visibility.Collapsed;
+                        friendInfo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        // Privat profile, dont show bio or statistics
+                        friendUsernameDisplay.Text = dr.GetString(dr.GetOrdinal("Username"));
+
+                        myBitmapImage.BeginInit();
+                        myBitmapImage.UriSource = new Uri(dr.GetValue(dr.GetOrdinal("Image")).ToString());
+
+                        myBitmapImage.DecodePixelHeight = 200;
+                        myBitmapImage.EndInit();
+
+                        friendProfilePicture.Source = myBitmapImage;
+
+                        friendBioDisplay.Text = dr.GetString(dr.GetOrdinal("Bio"));
+                        friendBioDisplay.Text = "Profile is set to private.";
+                        weekly.Text = "Weekly Average: Private";
+                        monthly.Text = "Monthly Average: Private";
+
+                        userInfo.Visibility = Visibility.Collapsed;
+                        friendInfo.Visibility = Visibility.Visible;
+                    }
+                    dr.Close();
+                }
+                else
+                {
+                    error.Text = "Select friend.";
+                }
+            }   
+        }
+
+        private void goBack(object sender, RoutedEventArgs e)
+        {
+            userInfo.Visibility = Visibility.Visible;
+            friendInfo.Visibility = Visibility.Collapsed;
         }
 
         private void addFriend(object sender, RoutedEventArgs e)

@@ -29,24 +29,45 @@
                     <ImageBrush ImageSource="/exit.png" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
+            
             <Border Background="#FF212121" Grid.Row="1"/>
-            <UniformGrid Columns="1" Rows="5" Grid.Row="1">
+            <UniformGrid x:Name="userInfo" Columns="1" Rows="5" Grid.Row="1">
                 <TextBlock x:Name="usernameDisplay" Foreground="#FF128F94" Padding="0,2,0,2" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <Image Height="200" x:Name="profilePicture"/>
-                <StackPanel Margin="0,25,0,-51" Background="#FF323232" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock x:Name="bioTitle" Text="Bio" Foreground="#FF128F94" FontSize="44" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <TextBlock x:Name="bioDisplay" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" />
-                    <TextBox x:Name="bioInput" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" Visibility="Collapsed" SelectionTextBrush="#FF128F94"/>
-                </StackPanel>
+                <Border Margin="0,25,0,0" Background="#FF323232" Width="585" Height="250">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Height="250">
+                        <TextBlock x:Name="bioTitle" Text="Bio" Foreground="#FF128F94" FontSize="44" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                        <TextBlock x:Name="bioDisplay" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" />
+                        <TextBox x:Name="bioInput" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="130" Width="585" Visibility="Collapsed" SelectionTextBrush="#FF128F94"/>
+                    </StackPanel>
+                </Border>
                 <UniformGrid Columns="2" Rows="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Style="{DynamicResource RoundButton}" Click="addPicture" x:Name="pictureUploader" ToolTip="Upload image"  BorderBrush="#00673AB7" Background="#FF323232"  Height="64" Width="256" Foreground="#FF128F94" FontSize="24" Content="Upload profile picture" Margin="0,75,0,0"/>
                     <Button Style="{DynamicResource RoundButton}" Click="updateBio" x:Name="bioUpdater" ToolTip="Update bio"  BorderBrush="#00673AB7" Background="#FF323232"  Height="64" Width="256" Foreground="#FF128F94" FontSize="24" Content="Update bio" Margin="0,75,0,0"/>
                 </UniformGrid>
-                <Button  Click="goMain" x:Name="mainButton" ToolTip="Back to menu"  BorderBrush="#00673AB7" Background="#FF323232"  Height="128" Width="256" Foreground="#FF128F94" FontSize="32" Content="Back to menu" Margin="0,15,0,0"/>
+                <Button Style="{DynamicResource RoundButton}" Click="goMain" x:Name="mainButton" ToolTip="Back to menu"  BorderBrush="#00673AB7" Background="#FF323232"  Height="72" Width="256" Foreground="#FF128F94" FontSize="32" Content="Back to menu" Margin="0,15,0,0"/>
             </UniformGrid>
+            
+            <UniformGrid x:Name="friendInfo" Columns="1" Rows="5" Grid.Row="1" Visibility="Collapsed">
+                <TextBlock x:Name="friendUsernameDisplay" Foreground="#FF128F94" Padding="0,2,0,2" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Image Height="200" x:Name="friendProfilePicture"/>
+                <Border Margin="0,25,0,0" Background="#FF323232" Width="585" Height="400">
+                    <StackPanel Height="400">
+                        <TextBlock x:Name="friendBioTitle" Text="Bio" Foreground="#FF128F94" FontSize="44" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                        <TextBlock x:Name="friendBioDisplay" Foreground="#FF128F94" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Height="33" Width="565" />
+                        <StackPanel Orientation="Horizontal"  Height="120" Width="800">
+                            <TextBlock x:Name="weekly" Text="Weekly Average:" FontSize="24" FontWeight="Medium" Foreground="#FF128F94" HorizontalAlignment="Center" Margin="50,10,0,0"/>
+                            <TextBlock x:Name="monthly" Text="Monthly Average:" FontSize="24" FontWeight="Medium" Foreground="#FF128F94" HorizontalAlignment="Center" Margin="30,10,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Button Style="{DynamicResource RoundButton}" Click="goBack" x:Name="backButton" ToolTip="Back to profile"  BorderBrush="#00673AB7" Background="#FF323232"  Height="72" Width="256" Foreground="#FF128F94" FontSize="28" Content="Back to profile" Margin="0,15,0,0"/>
+            </UniformGrid>
+            
             <Border Background="#FF323232" Margin="900,87,25,299" Grid.Row="1">
                 <Canvas>
-                    <TextBlock x:Name="friendsTitle" Text="Friends" Foreground="#FF128F94" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="62" Canvas.Top="1" />
+                    <TextBlock x:Name="friendTitle" Text="Friends" Foreground="#FF128F94" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="62" Canvas.Top="1" />
+                    <TextBlock x:Name="requestTitle" Text="Requests" Foreground="#FF128F94" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="52" Canvas.Top="1" Visibility="Collapsed"/>
                     <Button x:Name="requests" Click="toggleRequests" Canvas.Left="188" Foreground="#00000000" BorderBrush="#00707070" Canvas.Top="1" ToolTipService.InitialShowDelay="5000"  ToolTipService.ShowDuration="2000" ToolTipService.BetweenShowDelay="10000" ToolTip="Friend requests.">
                         <Button.Background>
                             <ImageBrush ImageSource="/requestToggle.png" Stretch="UniformToFill"/>
@@ -55,18 +76,19 @@
                     <ListBox x:Name="friendsList" Canvas.Left="28" Canvas.Top="44" Height="184" Width="168" Background="#FF212121" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <ListBox x:Name="requestList" Canvas.Left="28" Canvas.Top="44" Height="184" Width="168" Background="#FF212121" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed"/>
 
-                    <UniformGrid x:Name="requestActions" Columns="1" Rows="3" HorizontalAlignment="Center" VerticalAlignment="Top" Height="122" Canvas.Left="29" Canvas.Top="232" Visibility="Collapsed">
+                    <UniformGrid x:Name="requestActions" Columns="1" Rows="3" HorizontalAlignment="Center" VerticalAlignment="Top" Height="122" Canvas.Left="29" Canvas.Top="273" Visibility="Collapsed">
                         <TextBlock x:Name="requestResult" FontSize="18" Foreground="#FF128F94" Padding="0,2,0,2" HorizontalAlignment="Center"/>
                         <UniformGrid Columns="2" Rows="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="111" Canvas.Left="28" Canvas.Top="148" Margin="0,-44,0,0">
-                            <Button Click="accept" x:Name="acceptRequest" ToolTip="Add" BorderBrush="#00673AB7" Background="#FF323232"  Height="32" Width="84" Foreground="#FF128F94" FontSize="14" Content="Add" Margin="0,15,0,0"/>
-                            <Button Click="decline" x:Name="declineRequest" ToolTip="Remove" BorderBrush="#00673AB7" Background="#FF323232" Height="32" Width="84" Foreground="#FF128F94" FontSize="14" Content="Remove" Margin="0,15,0,0"/>
+                            <Button Click="accept" x:Name="acceptRequest" ToolTip="Add" BorderBrush="#00673AB7" Background="#FF323232"  Height="32" Width="84" Foreground="#FF128F94" FontSize="14" Content="Accept" Margin="0,15,0,0"/>
+                            <Button Click="decline" x:Name="declineRequest" ToolTip="Remove" BorderBrush="#00673AB7" Background="#FF323232" Height="32" Width="84" Foreground="#FF128F94" FontSize="14" Content="Decline" Margin="0,15,0,0"/>
                         </UniformGrid>
                     </UniformGrid>
                     
-                    <UniformGrid x:Name="friendActions" Columns="1" Rows="3" HorizontalAlignment="Center" VerticalAlignment="Top" Height="122" Canvas.Left="29" Canvas.Top="232">
-                        <TextBox x:Name="friendInput" Foreground="#FF128F94" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="128" SelectionTextBrush="#FF128F94" Background="#FF212121"/>
+                    <UniformGrid x:Name="friendActions" Columns="1" Rows="3" HorizontalAlignment="Center" VerticalAlignment="Top" Height="122" Canvas.Left="29" Canvas.Top="212">
+                        <TextBox x:Name="friendInput" Foreground="#FF128F94" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" Width="128" SelectionTextBrush="#FF128F94" Background="#FF212121" Margin="0,20,0,0"/>
                         <TextBlock x:Name="error" FontSize="18" Foreground="Red" Padding="0,2,0,2" HorizontalAlignment="Center"/>
-                        <UniformGrid Columns="2" Rows="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="111" Canvas.Left="28" Canvas.Top="148" Margin="0,-44,0,0">
+                        <Button Click="viewFriend" x:Name="viewFriendButton" ToolTip="View"  BorderBrush="#00673AB7" Background="#FF323232"  Height="32" Width="84" Foreground="#FF128F94" FontSize="14" Content="View" Margin="0,-25,0,0"/>
+                        <UniformGrid Columns="2" Rows="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="111" Canvas.Left="28" Canvas.Top="148" Margin="0,-60,0,0">
                             <Button Click="addFriend" x:Name="addFriendButton" ToolTip="Add"  BorderBrush="#00673AB7" Background="#FF323232"  Height="32" Width="84" Foreground="#FF128F94" FontSize="14" Content="Add" Margin="0,15,0,0"/>
                             <Button Click="removeFriend" x:Name="removeFriendButton" ToolTip="Remove"  BorderBrush="#00673AB7" Background="#FF323232" Height="32" Width="84" Foreground="#FF128F94" FontSize="14" Content="Remove" Margin="0,15,0,0"/>
                         </UniformGrid>
